@@ -13,10 +13,12 @@
     "dotenv": "8.1.0",
     "express": "4.17.1",
     "express-validator": "6.2.0",
+    "fast-json-patch": "3.0.0-0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "8.5.1",
     "morgan": "~1.9.1",
-    "pug": "2.0.4"
+    "pug": "2.0.4",
+    "rfc6902": "3.0.4"
   },
   "repository": {
     "type": "git",
