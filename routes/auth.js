@@ -5,7 +5,7 @@ var router = express.Router();
 require('dotenv').config();
 
 router.post('/login', [
-    check('username').isEmail().trim(),
+    check('username').isString().trim(),
     check('password').isLength({ min: 5 }),
     sanitizeBody('*'),
 ], (req, res) => {

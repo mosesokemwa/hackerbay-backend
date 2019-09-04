@@ -1,27 +1,22 @@
-var { validationResult } = require('express-validator');
-var verifyToken  = require('../middleware/authMiddleware')
-var jwt = require('jsonwebtoken')
-require('dotenv').config()
+var {
+    validationResult
+} = require('express-validator');
 
+exports.home_page_get = [
+    (req, res, next) => {
+        // Save errors from validating, if any.
+        const errors = validationResult(req)
 
-exports.home_page_get = (req, res, next) => {
-    const { token } = req.headers
-
-    if(!token){
-        return res.status(403).json({authorized: false, error: 'Missing token'})
-    }
-
-    jwt.verify(token, process.env.jwtSecret, (err, decoded) => {
-        if(err) {
-            return res.status(401).send({ authorized: false, error: 'verification has failed or token has expired.'}) 
-        }
-        req.user = decoded
-        var errors = validationResult(req)
-        
         // Check if there were errors from the form.
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() })
+            return res.status(400).json({
+                errors: errors.array()
+            })
         }
-        res.status(200).send({authorized: true, msg: "welcome home"})
-    })
-}
+
+        res.json({
+            authorised: true,
+            msg: "welcome to the home page"
+        })
+    },
+]

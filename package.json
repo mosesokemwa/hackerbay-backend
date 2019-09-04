@@ -5,7 +5,8 @@
   "main": "app.js",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,10 +14,15 @@
     "dotenv": "8.1.0",
     "express": "4.17.1",
     "express-validator": "6.2.0",
+    "fast-json-patch": "3.0.0-0",
     "http-errors": "~1.6.3",
+    "image-downloader": "^3.5.0",
     "jsonwebtoken": "8.5.1",
     "morgan": "~1.9.1",
-    "pug": "2.0.4"
+    "nodemon": "^1.19.2",
+    "pug": "2.0.4",
+    "rfc6902": "3.0.4",
+    "sharp": "^0.23.0"
   },
   "repository": {
     "type": "git",
