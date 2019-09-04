@@ -4,8 +4,7 @@ function jwtSecret() {
 
 echo "[GIT] cloning hacker-bay project....."
 git clone git@github.com:mosesokemwa/hackerbay-backend.git
-alias proj="cd hackerbay-backend"
-proj
+cd hackerbay-backend
 echo "[hacker-bay] creating a jwtSecret key....."
 echo "jwtSecret=$(jwtSecret)" >> .env
 echo "[hacker-bay] installing project dependancies....."
