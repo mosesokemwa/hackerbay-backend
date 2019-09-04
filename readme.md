@@ -26,12 +26,12 @@ npm install
 #### via curl
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/mosesokemwa/hacker-bay/master/setup.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/mosesokemwa/hackerbay-backend/develop/setup.sh)"
 ```
 
 #### via wget
 ```shell
-sh -c "$(wget -O- https://raw.githubusercontent.com/mosesokemwa/hacker-bay/master/setup.sh)"
+sh -c "$(wget -O- https://raw.githubusercontent.com/mosesokemwa/hackerbay-backend/develop/setup.sh)"
 ```
 - Then run `npm start` in your terminal
 
