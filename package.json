@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/mosesokemwa/hackerbay-backend/issues"
   },
-  "homepage": "https://github.com/mosesokemwa/hackerbay-backend#readme"
+  "homepage": "https://github.com/mosesokemwa/hackerbay-backend#readme",
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
 }
