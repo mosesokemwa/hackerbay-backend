@@ -1,46 +1,145 @@
 # Backend Task
 
-As we are expanding our capabilities at HackerBay, we have begun to build a multitude of backend microservices to support and simplify our applications.
+### Setup
 
-Your task is to build a simple stateless microservice in Nodejs, with three major functionalities -
-- Authentication
-- JSON patching
-- Image Thumbnail Generation
+This project requires [Node.js](https://nodejs.org/en/download/)
 
-We have no requirements for which frameworks/libraries to use, choose whichever seem best suited for the task!
+To get up and running: 
 
-### Required Endpoints
+- Clone the repo.
+```
+git clone git@github.com:mosesokemwa/hackerbay-backend.git
+```
 
-The API should feature the following endpoint functionality -
+- Change terminal path to the the project folder
+```
+cd hackerbay-backend
+```
+- Create a ```.env``` file and set ```jwtSecret``` to any secret phrase you want.
+- Install project dependencies with
+```
+npm install
+```
+- Start the app using `npm start`, it will be runningpn PORT `3000`.
 
-#### Public Endpoints
-- Login
+### Alternative project setup
+#### via curl
+
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/mosesokemwa/hacker-bay/master/setup.sh)"
+```
+
+#### via wget
+```shell
+sh -c "$(wget -O- https://raw.githubusercontent.com/mosesokemwa/hacker-bay/master/setup.sh)"
+```
+- Then run `npm start` in your terminal
+
+### HTTP Rest Client Tool
+For testing the API endpoints I'm using [Insomnia](https://insomnia.rest/), a rest client
+
+### Public Endpoints
+#### Login
 Request body should contain an arbitrary username/password pair
 Treat it as a mock authentication service and accept any username/password.
 Return a signed Json Web Token(JWT, https://jwt.io/) which can be used to validate future requests.
 
+- You can pass in any username or password to login.
+- Set the request to `POST` and the url to `/api/auth/login` 
+- In the `Body` for Insomnia request, select `JSON` and set username and password keys
+- Hit ```Send``` and you will get response with user's name and token
 
-#### Protected Endpoints
-The following two endpoints should be protected. The JWT obtained in the “Login” endpoint must be attached to each request.  If the JWT is missing or invalid, these endpoints should reject the request.
+```json
+// set this in the body
+{
+    "username":"replace-with-random-username",
+    "password":"replace-with-random-passowrd"
+}
+```
+ ```json
+//  expected response
+ {
+    "user": "replace-with-random-username",
+    "authorized": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJlcGxhY2Utd2l0aC1yYW5kb20tdXNlcm5hbWUiLCJpYXQiOjE1Njc2MDEzMTYsImV4cCI6MTU2NzYzNzMxNn0.fmHWQp8SEbBpuYLz0vjHK-tdHHFZeA4jRWXwPSfGqAI"
+}
+ ```
 
-- Apply Json Patch
-Request body should contain a JSON object and a JSON patch object (http://jsonpatch.com/).
-Apply the json patch to the json object, and return the resulting json object.
+---
+### Protected Endpoints
+#### Apply Json Patch
+- Set request to **PATCH**
+- the URL to use is 'api/apply-json-patch'
+- Set token in Header of the request, header key will be `token` and value will be the token recieved after **login**.
+- In the `Body` for Insomnia request, select `JSON` and set the key ```jsonObject``` to an object you would like to patch. Set the key ```jsonPatchObject``` to the object you want to use to patch the ```jsonObject```
+- Hit `Send`
 
-- Create Thumbnail
+```json
+// expected json body
+{
+	"jsonObject" :
+	{ 
+		"user": { 
+			"firstName": "Moses", 
+			"lastName": "Okemwa" 
+		} 
+	},
+	"jsonPatchObject": [
+		{
+			"op": "replace", 
+			"path": "/user/firstName", 
+			"value": "Okemwa"
+		},
+		{
+			"op": "replace", 
+			"path": "/user/lastName", 
+			"value": "Moses"}
+	]
+}
+```
+
+```json
+// expected response
+{
+    "patchedObject": {
+        "user": {
+            "firstName": "Okemwa",
+            "lastName": "Moses"
+        }
+    },
+    "err": {}
+}
+```
+
+#### Create Thumbnail
 Request should contain a public image URL.
 Download the image, resize to 50x50 pixels, and return the resulting thumbnail.
 
+- Set request to **POST**
+- the URL to use is 'api/create-thumbnail'
+- Set token in Header of the request, header key will be 'token' and value will be the token recieved after authentication.
+- In the `Body` for Insomnia request, select `JSON` and set the key ```imgUrl``` to a url of an image you would like to use
+- This request will download teh image and resize it to 50x50 pixels
 
-### General Requirements
+```json
+// expected json body
+{
+    "imageUrl": "https://xyzwuvn.co.ke/img/min/me4.jpg"
+}
+```
 
+```json
+// expected response
+ {
+    "converted": true,
+    "user": "moses",
+    "success": "Image has been resized",
+    "thumbnail": "./public/images/resize/"
+}
+```
 
-#### Code Requirements 
-- Include a test suite for the microservice.
-- We recommend using Mocha (https://mochajs.org/).
-- API should reject invalid request inputs.  Test the edge cases!
-- Use modern javascript ES6 syntax.
-
+#### Running test suite
+Run ```npm test``` from the application's root directory.
 
 #### Other Requirements 
 - Use Git for version control, and host the project in a Github repository.
