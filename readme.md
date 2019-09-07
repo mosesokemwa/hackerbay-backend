@@ -23,15 +23,16 @@ npm install
 - Start the app using `npm start`, it will be runningpn PORT `3000`.
 
 ### Alternative project setup
+
 - **via curl**
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/mosesokemwa/hackerbay-backend/develop/setup.sh)"
+curl -fsSL https://raw.githubusercontent.com/mosesokemwa/hackerbay-backend/develop/setup.sh | bash
 ```
 
 - **via wget**
 ```shell
-sh -c "$(wget -O- https://raw.githubusercontent.com/mosesokemwa/hackerbay-backend/develop/setup.sh)"
+wget -fsSL https://raw.githubusercontent.com/mosesokemwa/hackerbay-backend/develop/setup.sh | bash
 ```
 - Change directories `cd hackerbay-backend`
 - Then run `npm start` in your terminal
