@@ -20,9 +20,14 @@ exports.create_thumbnail_post = (req, res, next) => {
                 sharp(filename)
                     .resize(50, 50)
                     .toFile(`${resizeFolder}output.${imageUrlExt}`, (err) => {
-                        if (err) { return next(err) }
+                        if (err) {
+                            return next(err)
+                        }
                         return res.json({
-                            converted: true, user: req.user.username, success: 'Image has been resized', thumbnail: resizeFolder,
+                            converted: true,
+                            user: req.user.username,
+                            success: 'Image has been resized',
+                            thumbnail: resizeFolder,
                         })
                     })
             })
@@ -30,6 +35,6 @@ exports.create_thumbnail_post = (req, res, next) => {
                 res.status(400).json({ error: 'Oops something went wrong. Kindly check your image url and try again' })
             })
     } else {
-        res.status(400).json({ error: `We only handle image files with extensions - ${[...imageExt]}` })
+        res.status(400).json({ error: `We only handle image files with these extensions - ${[...imageExt]}` })
     }
 }
